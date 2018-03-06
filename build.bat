@@ -1,3 +1,3 @@
 
 docker build -t eac_files docker 
-docker run -v %~dp0Build\App:C:\App eac_files
+docker run -it --rm -v %~dp0App:C:\App eac_files

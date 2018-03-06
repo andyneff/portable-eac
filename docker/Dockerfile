@@ -73,6 +73,7 @@ RUN $url = \"http://www.rarewares.org/files/mp3/lame$env:LAME_VERSION-64.zip\"; 
     mkdir C:\lame > $null; \
     Move-Item C:\ltemp\doc\html\* C:\lame\; \
     Move-Item C:\ltemp\lame* C:\lame\; \
+    Remove-Item -Force C:\lame\Makefile.*; \
     Remove-Item -Force lame.zip; \
     Remove-Item -Force -Recurse C:\ltemp
 # Files in C:\lame
@@ -134,4 +135,17 @@ RUN $url = \"https://web.archive.org/web/20180201033327/http://monkeysaudio.com/
     Remove-Item -Force mac.exe; \
     Remove-Item -Force -Recurse C:\mtemp
 
-CMD powershell
+FROM microsoft/nanoserver:1709
+
+COPY --from=eac ["C:\\\\eac", "C:\\\\eac"]
+COPY --from=aac ["C:\\\\aac", "C:\\\\aac"]
+COPY --from=mac ["C:\\\\mac", "C:\\\\mac"]
+COPY --from=lame ["C:\\\\lame", "C:\\\\lame"]
+COPY --from=ogg ["C:\\\\ogg", "C:\\\\ogg"]
+
+CMD xcopy c:\eac c:\App\EAC\ /s /e & \
+    xcopy c:\aac c:\App\AAC\ /s /e & \
+    xcopy c:\mac c:\App\APE\ /s /e & \
+    xcopy c:\lame c:\App\LAME\ /s /e & \
+    xcopy c:\ogg c:\App\Ogg\ /s /e & \
+
