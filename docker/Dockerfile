@@ -50,12 +50,6 @@ RUN $url = \"http://www.exactaudiocopy.de/eac-$env:EAC_VERSION.exe\"; \
     Remove-Item -Force eac.exe
 # Files in C:\eac
 
-    # (New-Object System.Net.WebClient).DownloadFile('http://www.exactaudiocopy.de/en/wp-content/uploads/2008/01/English.zip', 'English.zip'); \
-    # (New-Object System.Net.WebClient).DownloadFile('http://www.exactaudiocopy.de/en/wp-content/uploads/2008/01/Dutch.zip', 'Dutch.zip'); \
-    # (New-Object System.Net.WebClient).DownloadFile('http://www.exactaudiocopy.de/en/wp-content/uploads/2008/01/french.zip', 'french.zip'); \
-    # (New-Object System.Net.WebClient).DownloadFile('http://www.exactaudiocopy.de/en/wp-content/uploads/2008/01/Spanish.zip', 'Spanish.zip'); \
-    # (New-Object System.Net.WebClient).DownloadFile('http://www.exactaudiocopy.de/en/wp-content/uploads/2008/01/Uzbek.zip', 'Uzbek.zip'); \
-
 FROM microsoft/windowsservercore:1709 AS lame
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop';"]
@@ -147,5 +141,4 @@ CMD xcopy c:\eac c:\App\EAC\ /s /e & \
     xcopy c:\aac c:\App\AAC\ /s /e & \
     xcopy c:\mac c:\App\APE\ /s /e & \
     xcopy c:\lame c:\App\LAME\ /s /e & \
-    xcopy c:\ogg c:\App\Ogg\ /s /e & \
-
+    xcopy c:\ogg c:\App\Ogg\ /s /e
